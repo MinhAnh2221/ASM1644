@@ -1,20 +1,24 @@
 var express = require('express');
 const ToyModel = require('../model/ToyModel');
-const async = require('hbs/lib/async');
 const AccountModel = require('../model/AccountModel');
+const async = require('hbs/lib/async');
+const TheloaiModel = require('../model/TheloaiModel');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('mainpage/homepage');
+router.get('/', async(req, res, next) => {
+  var theloai = await TheloaiModel.find();
+  res.render('mainpage/homepage', {theloai: theloai});
 });
 router.get('/product', async(req, res) => {
   var toys = await ToyModel.find({});
-  res.render('mainpage/productpage', {toys : toys});
+  var theloai = await TheloaiModel.find();
+  res.render('mainpage/productpage', {toys : toys, theloai: theloai});
 });
 router.get('/product/detail/:id', async(req, res) => {
   var toys = await ToyModel.findById(req.params.id);
-  res.render('mainpage/productdetailpage',{toys : toys});
+  var theloai = await TheloaiModel.find();
+  res.render('mainpage/productdetailpage',{toys : toys,theloai: theloai});
 });
 //thanh toan
 router.get('/cart', function(req, res, next) {
@@ -49,7 +53,10 @@ router.post("/login", async(req, res) => {
 })
 
 router.post('/signup', async (req, res) => {
-  await AccountModel.create(req.body);
+  var account = req.body;
+  await AccountModel.create(account)
+  .then(()=> console.log('add ok'))
+  .catch((err)=> console.log(err))
   res.redirect('/login-signup');
 });
 
