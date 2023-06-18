@@ -14,7 +14,12 @@ var app = express();
 //body-parser
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended : false}));
-
+//mongodb
+var mongoose = require("mongoose");
+var uri = "mongodb+srv://tutagch210167:tu19032003@cluster0.96hl8wr.mongodb.net/assignment";
+mongoose.connect(uri)
+.then(() => console.log ("Connect to DB succeed !"))
+.catch((err) => console.log (err));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

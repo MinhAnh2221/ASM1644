@@ -56,8 +56,8 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                <li><a href="/login-signup"><i class="fa fa-lock"></i> Login</a></li>
                             </ul>
                         </div>
                     </div>
@@ -106,35 +106,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 padding-right">
-					<div class="product-details"><!--product-details-->
-						<div class="col-sm-5">
-							<div class="view-product">
-								<img src="/images/product-details/1.jpg" alt="" />
-							</div>
-						</div>
-						<div class="col-sm-7">
-							<div class="product-information"><!--/product-information-->
-								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
-								<h2>Anne Klein Sleeveless Colorblock Scuba</h2>
-								<p>Web ID: 1089772</p>
-								<img src="images/product-details/rating.png" alt="" />
-								<span>
-									<span>US $59</span>
-									<label>Quantity:</label>
-									<input type="text" value="3" />
-									<button type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										Add to cart
-									</button>
-								</span>
-								<p><b>Availability:</b> In Stock</p>
-								<p><b>Condition:</b> New</p>
-								<p><b>Brand:</b> E-SHOPPER</p>
-								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
-							</div><!--/product-information-->
-						</div>
-					</div><!--/product-details-->
-				</div>
+                    <div class="product-details"><!--product-details-->
+                        <div class="col-sm-5">
+                            <div class="view-product">
+                                <img src="{{toys.anh}}" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="product-information"><!--/product-information-->
+                                <h2>{{toys.ten}}</h2>
+                                <p>Web ID: {{toys.masp}}</p>
+                                <span>
+                                    <span>US ${{toys.gia}}</span>
+                                    <label>Quantity:</label>
+                                    <input type="number" value="1" min="1" max="{{toys.soluong}}" />
+                                    <button type="button" class="btn btn-fefault cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Add to cart
+                                    </button>
+                                </span>
+                                <p><b>Availability:</b> In Stock</p>
+                                <p><b>Condition:</b> New</p>
+                                <p><b>From:</b> {{toys.xuatsu}}</p>
+                                <a href=""><img src="images/product-details/share.png" class="share img-responsive"
+                                        alt="" /></a>
+                            </div><!--/product-information-->
+                        </div>
+                    </div><!--/product-details-->
+                </div>
             </div>
         </div>
     </section>
