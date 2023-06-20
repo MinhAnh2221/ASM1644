@@ -3,11 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
-
 
 var app = express();
 
@@ -17,7 +15,8 @@ app.use(bodyParser.urlencoded({ extended : false}));
 //mongodb
 var mongoose = require("mongoose");
 var uri = "mongodb+srv://tutagch210167:tu19032003@cluster0.96hl8wr.mongodb.net/assignment";
-mongoose.connect(uri)
+var uritest = "mongodb://127.0.0.1:27017/assginment";
+mongoose.connect(uritest)
 .then(() => console.log ("Connect to DB succeed !"))
 .catch((err) => console.log (err));
 // view engine setup

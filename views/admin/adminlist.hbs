@@ -2,23 +2,23 @@
   <head>
      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
 
   </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -37,7 +37,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="/logout" role="button">
+      <a class="nav-link"  href="/login-signup">
       Log Out
       </a>
 </li>
@@ -49,7 +49,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <span class="brand-text font-weight-light">Admin page</span>
+      <span class="brand-text font-weight-light"></span>
     </a>
 
     <!-- Sidebar -->
@@ -59,7 +59,7 @@
         <div class="image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">admin@gmail.com</a>
+          <a href="#" class="d-block">ATN COMPANY</a>
         </div>
       </div>
 
@@ -71,15 +71,24 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
           <li class="nav-item">
-            <a href="/admin/artist" class="nav-link">
-                Artist
+            <a href="/admin/list" class="nav-link">
+                Manage Toys
             </a>
           </li>
           <li class="nav-item">
-            <a href="/admin/request" class="nav-link">
-                Booking Request
+            <a href="/admin/type" class="nav-link">
+                Manage Type 
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="/admin/checkoutwait" class="nav-link">
+                Manage Waiting Checkout
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/shipping" class="nav-link">
+                Manage Shipping 
             </a>
           </li>
         </ul>
@@ -100,14 +109,11 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Artist Management</h3>
+                <h3 class="card-title">TOYS MANAGEMENT</h3>
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <div class="input-group-append">
-                    <form action="" method="GET">
-                      <button type="submit" class="btn btn-default">Add
-                      </button>
-                    </form>
+                      <button type="submit" class="btn btn-default"><a href="/admin/add">Add</a></button>
                     </div>
                   </div>
                 </div>
@@ -117,33 +123,32 @@
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>Product code</th>
                       <th>Image</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Birthday</th>
+                      <th>Name</th>
+                      <th>Origin</th>
+                      <th>Type</th>
                       <th>Price</th>
-                      <th>Description</th>
+                      <th>Quantity</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                    {{#each toys }}
                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{{masp}}</td>
+                      <td><img src="{{anh}}" alt="" width="100px"></td>
+                      <td>{{ten}}</td>
+                      <td>{{xuatsu}}</td>
+                      <td>{{theloai}}</td>
+                      <td>{{gia}}</td>
+                      <td>{{soluong}}</td>
                       <td>
-                            <a href="" class="btn btn-primary">Edit</a>
-                            <form action="" method="POST" style="display: inline-block">
-                            
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
-                            </form>
+                            <a href="/admin/edit/{{_id}}" class="btn btn-primary">Edit</a>
+                            <a href="/admin/delete/{{_id}}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this toy ?')">Delete</a>
                       </td>
-                    </tr>
+                    </tr>              
+                    {{/each}}
                   </tbody>
                 </table>
               </div>
@@ -160,38 +165,39 @@
     <!-- /.content -->
   </div>
       <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
+<script src="/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
+<script src="/plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="/plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/plugins/moment/moment.min.js"></script>
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
+<script src="/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
+<script src="/dist/js/pages/dashboard.js"></script>
+  </body>
   </body>
   </html>

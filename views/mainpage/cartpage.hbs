@@ -55,10 +55,11 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
-                            </ul>
+                            <ul class="nav navbar-nav">	
+								<li style="display: {{displayLog}}"><a href="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li style="display: {{displayLog}}"><a href="/logout"><i class="fa fa-shopping-cart"></i> Log out</a></li>
+								<li style="display: {{displayUnLog}}"><a href="/login-signup"><i class="fa fa-lock"></i> Login</a></li>
+							</ul>
                         </div>
                     </div>
                 </div>
@@ -115,39 +116,47 @@
                     <thead>
                         <tr class="cart_menu">
                             <td class="image">Item</td>
-                            <td class="description"></td>
+                            <td class="description">Name</td>
                             <td class="price">Price</td>
                             <td class="quantity">Quantity</td>
-                            <td class="total">Total</td>
                             <td></td>
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each cart }}
                         <tr>
                             <td class="cart_product">
-                                <a href=""><img src="images/cart/one.png" alt=""></a>
+                                <a href=""><img src="{{anh}}" alt="" width="100px"></a>
                             </td>
                             <td class="cart_description">
-                                <h4><a href="">Colorblock Scuba</a></h4>
-                                <p>Web ID: 1089772</p>
+                                <h4>{{ten}}</h4>
+                                 <input class="cart_quantity_input" type="hidden" name="ten" value="{{ten}}">
                             </td>
                             <td class="cart_price">
-                                <p>$59</p>
+                                <p>${{gia}}</p>
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href=""> + </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity" value="1"
-                                        autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href=""> - </a>
+                                        <input class="cart_quantity_input" type="text" value="{{soluong}}"
+                                            autocomplete="off" size="2">
+                                        <input class="cart_quantity_input" type="hidden" name="soluong" value="{{soluong}}">
                                 </div>
                             </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">$59</p>
-                            </td>
                             <td class="cart_delete">
-                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                <form action="/cart/delete/{{_id}}" method="post">
+                                <input class="cart_quantity_input" type="hidden" name="ten" value="{{ten}}">
+                                <button type="submit" class="cart_quantity_delete"><i class="fa fa-times"></i></button>
+                                </form>
                             </td>
+                        </tr>
+                        {{/each}}
+                        <tr>
+                            <td class="cart_description" colspan="3">
+                                <h4>tong tien</h4>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">{{tongtien}}</p>
+                                </td>
                         </tr>
                     </tbody>
                 </table>
@@ -156,7 +165,7 @@
     </section> <!--/#cart_items-->
     <section id="do_action">
         <div class="container">
-            <a class="btn btn-default check_out" href="">Check Out</a>
+            <a class="btn btn-default check_out" href="/checkout">Check Out</a>
         </div>
     </section><!--/#do_action-->
 
@@ -251,4 +260,5 @@
     <script src="js/price-range.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    </script>
 </body>

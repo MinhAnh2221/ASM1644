@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 const AccountSchema = mongoose.Schema(
-   {
-        "email": String,
-        "password": String
+   {    
+         fullname: String,
+         phone: String,
+         address: String,
+        email: String,
+        password: String,
    }
 );
-const AccountModel = mongoose.model("Account", AccountSchema, "account");
+const AccountModel = mongoose.model("account", AccountSchema, "account");
 module.exports = AccountModel;
