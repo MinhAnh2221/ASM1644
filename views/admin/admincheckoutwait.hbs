@@ -91,12 +91,23 @@
                                 Manage Waiting Checkout
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/admin/shipping" class="nav-link">
+                                Manage Shipping
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/history" class="nav-link">
+                                History
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="margin-top:50px;">
             <section class="content">
@@ -133,11 +144,14 @@
                                                 <td>{{totalquantity}}</td>
                                                 <td>{{total}}</td>
                                                 <td>{{note}}</td>
-                                                <td>{{status}}</td>
+                                                <td>{{#if status}}
+                                                    shipping
+                                                    {{else}}
+                                                    confirming
+                                                    {{/if}}</td>
                                                 <td>
-                                                    <a href="/admin/checkoutwait/confirm/{{_id}}" class="btn btn-primary">Confirm</a>
-                                                    <a href="/admin/delete/{{_id}}" class="btn btn-danger"
-                                                        onclick="return confirm('Are you sure to delete this toy ?')">Delete</a>
+                                                    <a href="/admin/checkoutwait/confirm/{{_id}}"
+                                                        class="btn btn-primary">Confirm</a>
                                                 </td>
                                             </tr>
                                             {{/each}}
@@ -194,8 +208,8 @@
         <script>
             const handlebars = require('handlebars');
             // Định nghĩa helper 'status'
-            handlebars.registerHelper('status', function(status) {
-            return status ? "shipping" : "waiting";
+            handlebars.registerHelper('status', function (status) {
+                return status ? "shipping" : "waiting";
             });
         </script>
     </body>

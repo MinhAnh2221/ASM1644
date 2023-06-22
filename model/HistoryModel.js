@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const CheckoutShippingSchema = mongoose.Schema(
+const HistoryModelSchema = mongoose.Schema(
    {    
         email: String,
         name: String,
@@ -8,8 +8,7 @@ const CheckoutShippingSchema = mongoose.Schema(
         note: String,
         totalquantity: Number,
         total: Number,
-        status: Boolean,
    }
 );
-const CheckoutShippingModel = mongoose.model("CheckoutShipping", CheckoutShippingSchema, "checkoutshipping");
-module.exports = CheckoutShippingModel;
+const HistoryModelModel = mongoose.model("HistoryModel", HistoryModelSchema, "history");
+module.exports = HistoryModelModel;

@@ -3,7 +3,7 @@ const async = require('hbs/lib/async');
 const ToyModel = require('../model/ToyModel');
 const TheloaiModel = require('../model/TheloaiModel');
 const CheckoutWaitModel = require('../model/CheckoutWaitModel');
-const CheckoutShippingModel = require('../model/CheckoutShipping');
+const HistoryModelModel = require('../model/HistoryModel');
 var router = express.Router();
 
 router.get('/list', async (req, res) => {
@@ -23,7 +23,8 @@ router.get('/type/delete/:id', async (req, res) => {
     res.redirect('/admin/type');
 });
 router.get('/add',async(req, res) => {
-    res.render('admin/adminadd');
+    var theloai = await TheloaiModel.find()
+    res.render('admin/adminadd',{theloai:theloai});
 });
 router.post('/create', async (req, res) => {
     await ToyModel.create(req.body);
@@ -35,7 +36,8 @@ router.get('/delete/:id', async (req, res) => {
 });
 router.get('/edit/:id', async (req, res) => {
     var toy = await ToyModel.findById(req.params.id);
-    res.render('admin/adminedit', { toy:toy});
+    var theloai = await TheloaiModel.find();
+    res.render('admin/adminedit', { toy:toy, theloai:theloai});
  })
  router.post('/edit/:id', async (req, res) => {
    await ToyModel.findByIdAndUpdate(req.params.id,req.body);
@@ -43,25 +45,24 @@ router.get('/edit/:id', async (req, res) => {
  })
 
  router.get('/checkoutwait', async (req, res) => {
-    var checkoutwait = await CheckoutWaitModel.find();
+    var checkoutwait = await CheckoutWaitModel.find({status: false});
     res.render('admin/admincheckoutwait', { checkoutwait: checkoutwait });
  });
  router.get('/checkoutwait/confirm/:id',async (req, res) =>{
-    var shipping = await CheckoutWaitModel.findById(req.params.id);
-    console.log(shipping);
-    const newShipping = new CheckoutShippingModel({
-        email: shipping.email,
-        name: shipping.name,
-        phone: shipping.phone,
-        address: shipping.address,
-        note: shipping.note,
-        totalquantity: shipping.totalquantity,
-        total: shipping.total,
-        status: true,
-      });
-      await newShipping.save();
-    await CheckoutShippingModel.create(newShipping);
-    await CheckoutWaitModel.findByIdAndDelete(req.params.id);
+    await CheckoutWaitModel.findByIdAndUpdate(req.params.id,{status:true});
     res.redirect('/admin/checkoutwait');
+ })
+ router.get('/shipping', async (req, res) =>{
+    var checkoutshipping = await CheckoutWaitModel.find({status:true});
+    res.render('admin/adminshipping',{checkoutshipping: checkoutshipping});
+ })
+ router.post('/done/:id', async (req, res) =>{
+    await CheckoutWaitModel.findByIdAndDelete(req.params.id);
+    await HistoryModelModel.create(req.body);
+    res.redirect('/admin/shipping');
+ })
+ router.get('/history', async (req, res) =>{
+    var history = await HistoryModelModel.find();
+    res.render('admin/adminhistory',{ history: history});
  })
 module.exports = router;

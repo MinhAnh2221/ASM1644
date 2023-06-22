@@ -5,11 +5,11 @@ const TheloaiModel = require('../model/TheloaiModel');
 const CartModel = require('../model/CartModel');
 const async = require('hbs/lib/async');
 const CheckoutWaitModel = require('../model/CheckoutWaitModel');
+const HistoryModelModel = require('../model/HistoryModel');
 var router = express.Router();
 var an = "none";
 var hien = "block";
-var condition = false;
-var emailuser = "tu@gmail.com";
+var emailuser = null;
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {
@@ -24,13 +24,21 @@ router.get('/product', async (req, res) => {
   var toys = await ToyModel.find({});
   var theloai = await TheloaiModel.find();
   if(emailuser == null){
-    console.log(emailuser);
   res.render('mainpage/productpage', { toys: toys, theloai: theloai, displayUnlog: hien, displayLog: an});}
   else {
-    console.log(emailuser);
     res.render('mainpage/productpage', { toys: toys, theloai: theloai, displayUnLog: an,displayLog: hien });
   }
 });
+router.get('/product/:theloai', async (req, res) => {
+    var protucttheloai = await ToyModel.find({theloai: req.params.theloai});
+    var theloai = await TheloaiModel.find();
+    if(emailuser == null){
+      res.render('mainpage/productpage', {toys: protucttheloai,theloai:theloai, displayUnlog: hien, displayLog: an});}
+      else {
+        res.render('mainpage/productpage', {toys: protucttheloai,theloai: theloai, displayUnLog: an,displayLog: hien });
+      }
+    
+})
 router.get('/product/detail/:id', async (req, res) => {
   var toys = await ToyModel.findById(req.params.id);
   var theloai = await TheloaiModel.find();
@@ -86,7 +94,7 @@ router.post('/cart/delete/:id', async (req, res) => {
 })
 //checkout
 router.get('/checkout',async (req, res) => {
-  var account = await AccountModel.findOne({ten: emailuser});
+  var account = await AccountModel.findOne({email: emailuser});
   var carts = await CartModel.find({email: emailuser});
   var tongtien = 0;
   var tongsoluong = 0;
@@ -101,6 +109,15 @@ router.get('/checkout',async (req, res) => {
   else {
     res.render('mainpage/checkoutpage',{displayUnLog: an, displayLog: hien, account: account, carts: carts,tongtien:tongtien, tongsoluong: tongsoluong})
   }
+})
+router.get('/checkoutproduct',async (req, res) => {
+  var checkproductwait = await CheckoutWaitModel.find({email: emailuser});
+  var history = await HistoryModelModel.find({email: emailuser})
+  if(emailuser == null){
+    res.redirect('/');}
+    else {
+      res.render('mainpage/checkoutproduct',{displayUnLog: an, displayLog: hien,checkproductwait: checkproductwait,history: history})
+    }
 })
 router.post('/checkoutprocess',async (req, res)=>{
   await CheckoutWaitModel.create(req.body);
@@ -117,9 +134,12 @@ router.post('/checkout/delete/:id', async (req, res) => {
   await CartModel.findByIdAndDelete(req.params.id)
   res.redirect('/checkout');
 })
+router.get('/checprodcut',async (req, res) => {
+
+})
 //dangnhap-dangki
-router.get('/login-signup', function (req, res) {
-  res.render('mainpage/login-signin.hbs')
+router.get('/login', function (req, res) {
+  res.render('mainpage/login.hbs')
 });
 router.post("/login", async (req, res) => {
   var adminEmail = "admin@gmail.com";
@@ -147,7 +167,9 @@ router.post("/login", async (req, res) => {
     }
   }
 })
-
+router.get('/signup', function (req, res) {
+  res.render('mainpage/signup.hbs')
+});
 router.post('/signup', async (req, res) => {
   var account = req.body;
   await AccountModel.create(account)

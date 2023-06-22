@@ -58,7 +58,7 @@
                             <ul class="nav navbar-nav">	
 								<li style="display: {{displayLog}}"><a href="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<li style="display: {{displayLog}}"><a href="/logout"><i class="fa fa-shopping-cart"></i> Log out</a></li>
-								<li style="display: {{displayUnLog}}"><a href="/login-signup"><i class="fa fa-lock"></i> Login</a></li>
+								<li style="display: {{displayUnLog}}"><a href="/login"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
                         </div>
                     </div>
@@ -82,11 +82,13 @@
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
                                 <li><a href="/" class="active">Home</a></li>
-                                <li class="dropdown"><a href="/category">Shop<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-                                    </ul>
-                                </li>
+                                <li class="dropdown"><a href="/product">Shop<i class="fa fa-angle-down"></i></a>
+									<ul role="menu" class="sub-menu">
+									{{#each theloai }}
+										<li><a href="/product/{{theloai}}">{{theloai}}</a></li>
+									{{/each}}
+									</ul>
+								</li>
                                 <li class="dropdown"><a href="#">Blog</i></a>
                                 </li>
                                 <li><a href="contact-us.html">Contact</a></li>
@@ -166,6 +168,7 @@
     <section id="do_action">
         <div class="container">
             <a class="btn btn-default check_out" href="/checkout">Check Out</a>
+             <a class="btn btn-default check_out" href="/checkoutproduct">Check product</a>
         </div>
     </section><!--/#do_action-->
 

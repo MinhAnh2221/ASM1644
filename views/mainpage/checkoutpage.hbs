@@ -60,7 +60,7 @@
                                         Cart</a></li>
                                 <li style="display: {{displayLog}}"><a href="/logout"><i
                                             class="fa fa-shopping-cart"></i> Log out</a></li>
-                                <li style="display: {{displayUnLog}}"><a href="/login-signup"><i class="fa fa-lock"></i>
+                                <li style="display: {{displayUnLog}}"><a href="/login"><i class="fa fa-lock"></i>
                                         Login</a></li>
                             </ul>
                         </div>
@@ -140,7 +140,7 @@
                                     <input style="width: 500px" type="text" placeholder="Note" name="note"><br>
                                     <input type="hidden" value="{{tongtien}}" name="total">
                                     <input type="hidden" value="{{tongsoluong}}" name="totalquantity">
-                                    <input type="hidden" value="false"  name="status">
+                                    <input type="hidden" value="false" name="status">
                                     <button type="submit" class="btn btn-primary" onclick="return confirm('Comfirm all the product and information? ')">Continue</button>
                                 </form>
                             </div>
@@ -172,9 +172,11 @@
                             </td>
                             <td class="cart_description">
                                 <h4>{{ten}}</h4>
+                                <input type="hidden" name="ten" value="{{ten}}">
                             </td>
                             <td class="cart_price">
                                 <p>${{gia}}</p>
+                                <input type="hidden" name="gia" value="{{gia}}">
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
