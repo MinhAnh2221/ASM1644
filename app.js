@@ -15,8 +15,7 @@ app.use(bodyParser.urlencoded({ extended : false}));
 //mongodb
 var mongoose = require("mongoose");
 var uri = "mongodb+srv://tutagch210167:tu19032003@cluster0.96hl8wr.mongodb.net/assignment";
-var uritest = "mongodb://127.0.0.1:27017/assginment";
-mongoose.connect(uritest)
+mongoose.connect(uri)
 .then(() => console.log ("Connect to DB succeed !"))
 .catch((err) => console.log (err));
 // view engine setup
