@@ -98,7 +98,9 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search" />
+							<form action="/search" method="post">
+								<input type="search" placeholder="Search" name="name" required/>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -127,6 +129,7 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Features Items</h2>
+						<p class="title text-center">{{thongbao}}</p>
 						{{#each toys }}
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">

@@ -64,7 +64,21 @@ router.post('/addtocart/:id', async (req, res) => {
     })
     await ToyModel.findByIdAndUpdate(req.params.id, { soluong: soluongsau });
     res.redirect('/product')
-  } else res.redirect('/login-signup');
+  } else res.redirect('/login');
+});
+//search
+router.post('/search', async (req, res) => {
+  var keyword = req.body.name;
+  var theloai = await TheloaiModel.find();
+  var thongbao;
+  var toys = await ToyModel.find({ ten: new RegExp(keyword, "i")})
+  console.log(toys.length);
+  if (toys.length > 1 ) {
+    thongbao = "Not Found";
+    res.render('mainpage/productpage', {theloai: theloai,thongbao:thongbao})
+  } 
+  else  {res.render('mainpage/productpage', { toys: toys,theloai: theloai,thongbao:thongbao})}
+  ;
 });
 //thanh toan
 router.get('/cart', async (req, res, next) => {
@@ -162,7 +176,7 @@ router.post("/login", async (req, res) => {
         res.redirect('/');
       } else {
         // Sai mật khẩu
-        res.redirect('/login-signup');
+        res.redirect('/login');
       }
     }
   }
@@ -175,7 +189,7 @@ router.post('/signup', async (req, res) => {
   await AccountModel.create(account)
     .then(() => console.log('add ok'))
     .catch((err) => console.log(err))
-  res.redirect('/login-signup');
+  res.redirect('/login');
 });
 router.get('/logout', function (req, res) {
   condition = false;
