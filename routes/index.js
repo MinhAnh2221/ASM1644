@@ -84,7 +84,7 @@ router.post('/search', async (req, res) => {
 router.get('/cart', async (req, res, next) => {
     var cart = await CartModel.find({email: emailuser});
     console.log(cart);
-    var tongtien = 0;
+    var tongtien = 0; 
     cart.forEach(item => {
       var thanhtien = item.soluong * item.gia;
       tongtien += thanhtien;
